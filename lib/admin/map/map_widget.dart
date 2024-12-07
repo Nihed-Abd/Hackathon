@@ -50,10 +50,18 @@ class _MapWidgetState extends State<MapWidget> {
               onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
               initialLocation: _model.googleMapsCenter ??=
                   const LatLng(13.106061, -59.613158),
+              markers: (widget.locations ?? [])
+                  .map(
+                    (marker) => FlutterFlowMarker(
+                      marker.serialize(),
+                      marker,
+                    ),
+                  )
+                  .toList(),
               markerColor: GoogleMarkerColor.violet,
               mapType: MapType.normal,
               style: GoogleMapStyle.standard,
-              initialZoom: 14.0,
+              initialZoom: 15.0,
               allowInteraction: true,
               allowZoom: true,
               showZoomControls: true,

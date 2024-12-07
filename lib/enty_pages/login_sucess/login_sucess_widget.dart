@@ -106,9 +106,7 @@ class _LoginSucessWidgetState extends State<LoginSucessWidget> {
                     children: [
                       Flexible(
                         child: Text(
-                          FFLocalizations.of(context).getText(
-                            'pjbua8ci' /* Login successfully ! */,
-                          ),
+                          'Login successfully !',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter Tight',
@@ -128,11 +126,9 @@ class _LoginSucessWidgetState extends State<LoginSucessWidget> {
                         Expanded(
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('HomePage');
+                              context.pushNamed('HomePageCommercial');
                             },
-                            text: FFLocalizations.of(context).getText(
-                              '6lx9j0nx' /* Log In */,
-                            ),
+                            text: 'Log In',
                             options: FFButtonOptions(
                               height: 56.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(

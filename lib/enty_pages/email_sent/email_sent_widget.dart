@@ -105,9 +105,7 @@ class _EmailSentWidgetState extends State<EmailSentWidget>
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'nghyosvz' /* Email sent successfully */,
-                  ),
+                  'Email sent successfully',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Inter Tight',
@@ -124,9 +122,7 @@ class _EmailSentWidgetState extends State<EmailSentWidget>
                     HapticFeedback.lightImpact();
                     Navigator.pop(context);
                   },
-                  text: FFLocalizations.of(context).getText(
-                    'knmpxxw2' /* continue */,
-                  ),
+                  text: 'continue',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 55.0,
