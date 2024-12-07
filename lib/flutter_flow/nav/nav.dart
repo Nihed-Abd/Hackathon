@@ -7,7 +7,6 @@ import '/backend/backend.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -73,18 +72,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const MapWidget(),
+          appStateNotifier.loggedIn ? const CheckCodePinWidget() : const LogInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomePageWidget() : const MapWidget(),
+              appStateNotifier.loggedIn ? const CheckCodePinWidget() : const LogInWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: 'HomePageCommercial',
+          path: '/homePageCommercial',
+          builder: (context, params) => const HomePageCommercialWidget(),
         ),
         FFRoute(
           name: 'logIn',
@@ -118,14 +117,239 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const VisitsHomeWidget(),
         ),
         FFRoute(
-          name: 'ClientsHome',
-          path: '/clientsHome',
-          builder: (context, params) => const ClientsHomeWidget(),
+          name: 'AdminHome',
+          path: '/adminHome',
+          builder: (context, params) => const AdminHomeWidget(),
         ),
         FFRoute(
-          name: 'addRegion',
-          path: '/addRegion',
-          builder: (context, params) => const AddRegionWidget(),
+          name: 'Products',
+          path: '/products',
+          builder: (context, params) => const ProductsWidget(),
+        ),
+        FFRoute(
+          name: 'Areas',
+          path: '/areas',
+          builder: (context, params) => const AreasWidget(),
+        ),
+        FFRoute(
+          name: 'AreasDetails',
+          path: '/areasDetails',
+          builder: (context, params) => AreasDetailsWidget(
+            area: params.getParam(
+              'area',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['region'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ClientDetails',
+          path: '/clientDetails',
+          builder: (context, params) => ClientDetailsWidget(
+            client: params.getParam(
+              'client',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['market'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ManageUsers',
+          path: '/manageUsers',
+          builder: (context, params) => const ManageUsersWidget(),
+        ),
+        FFRoute(
+          name: 'ClientsAdmin',
+          path: '/clientsAdmin',
+          builder: (context, params) => const ClientsAdminWidget(),
+        ),
+        FFRoute(
+          name: 'VisitFile',
+          path: '/visitFile',
+          builder: (context, params) => VisitFileWidget(
+            visit: params.getParam(
+              'visit',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Meeting', 'VisitFile'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AddVisit',
+          path: '/addVisit',
+          builder: (context, params) => AddVisitWidget(
+            visit: params.getParam(
+              'visit',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Meeting'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'VisitFileCopy',
+          path: '/visitFileCopy',
+          builder: (context, params) => VisitFileCopyWidget(
+            visit: params.getParam(
+              'visit',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Meeting', 'VisitFile'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'MapMarket',
+          path: '/mapMarket',
+          builder: (context, params) => MapMarketWidget(
+            market: params.getParam(
+              'market',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['market'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'MapCommercial',
+          path: '/mapCommercial',
+          builder: (context, params) => const MapCommercialWidget(),
+        ),
+        FFRoute(
+          name: 'ProfileCommercial',
+          path: '/profileCommercial',
+          builder: (context, params) => const ProfileCommercialWidget(),
+        ),
+        FFRoute(
+          name: 'HomeVisitCommercial',
+          path: '/homeVisitCommercial',
+          builder: (context, params) => const HomeVisitCommercialWidget(),
+        ),
+        FFRoute(
+          name: 'VisitFileCopyCopy',
+          path: '/visitFileCopyCopy',
+          builder: (context, params) => VisitFileCopyCopyWidget(
+            visit: params.getParam(
+              'visit',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Meeting', 'VisitFile'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'RoadToMeet',
+          path: '/roadToMeet',
+          builder: (context, params) => RoadToMeetWidget(
+            market: params.getParam(
+              'market',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['market'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'MapGoverment',
+          path: '/mapGoverment',
+          builder: (context, params) => MapGovermentWidget(
+            goverment: params.getParam(
+              'goverment',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['gouvernerat'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ClientsAdminCopy',
+          path: '/clientsAdminCopy',
+          builder: (context, params) => const ClientsAdminCopyWidget(),
+        ),
+        FFRoute(
+          name: 'ClientDetailsCopy',
+          path: '/clientDetailsCopy',
+          builder: (context, params) => ClientDetailsCopyWidget(
+            client: params.getParam(
+              'client',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['market'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'VisitFileCopy2',
+          path: '/visitFileCopy2',
+          builder: (context, params) => VisitFileCopy2Widget(
+            visit: params.getParam(
+              'visit',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['Meeting', 'VisitFile'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AreaDetails',
+          path: '/areaDetails',
+          builder: (context, params) => AreaDetailsWidget(
+            area: params.getParam(
+              'area',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['region'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'GovermentDetils',
+          path: '/govermentDetils',
+          builder: (context, params) => GovermentDetilsWidget(
+            area: params.getParam(
+              'area',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['region'],
+            ),
+            gov: params.getParam(
+              'gov',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['gouvernerat'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ClientDetailsGov',
+          path: '/clientDetailsGov',
+          builder: (context, params) => ClientDetailsGovWidget(
+            client: params.getParam(
+              'client',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['market'],
+            ),
+            erea: params.getParam(
+              'erea',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['region'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) => const TestWidget(),
+        ),
+        FFRoute(
+          name: 'CheckCodePin',
+          path: '/checkCodePin',
+          builder: (context, params) => const CheckCodePinWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -245,6 +469,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -263,6 +488,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -296,7 +522,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/map';
+            return '/logIn';
           }
           return null;
         },
@@ -310,15 +536,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/logo_0.png',
+                    fit: BoxFit.fitWidth,
                   ),
                 )
               : page;

@@ -35,11 +35,23 @@ class MeetingRecord extends FirestoreRecord {
   String get status => _status ?? '';
   bool hasStatus() => _status != null;
 
+  // "gouvernerat" field.
+  DocumentReference? _gouvernerat;
+  DocumentReference? get gouvernerat => _gouvernerat;
+  bool hasGouvernerat() => _gouvernerat != null;
+
+  // "visitFile" field.
+  DocumentReference? _visitFile;
+  DocumentReference? get visitFile => _visitFile;
+  bool hasVisitFile() => _visitFile != null;
+
   void _initializeFields() {
     _date = snapshotData['date'] as DateTime?;
     _userId = snapshotData['user_id'] as DocumentReference?;
     _market = snapshotData['market'] as DocumentReference?;
     _status = snapshotData['status'] as String?;
+    _gouvernerat = snapshotData['gouvernerat'] as DocumentReference?;
+    _visitFile = snapshotData['visitFile'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -81,6 +93,8 @@ Map<String, dynamic> createMeetingRecordData({
   DocumentReference? userId,
   DocumentReference? market,
   String? status,
+  DocumentReference? gouvernerat,
+  DocumentReference? visitFile,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -88,6 +102,8 @@ Map<String, dynamic> createMeetingRecordData({
       'user_id': userId,
       'market': market,
       'status': status,
+      'gouvernerat': gouvernerat,
+      'visitFile': visitFile,
     }.withoutNulls,
   );
 
@@ -102,12 +118,14 @@ class MeetingRecordDocumentEquality implements Equality<MeetingRecord> {
     return e1?.date == e2?.date &&
         e1?.userId == e2?.userId &&
         e1?.market == e2?.market &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.gouvernerat == e2?.gouvernerat &&
+        e1?.visitFile == e2?.visitFile;
   }
 
   @override
-  int hash(MeetingRecord? e) =>
-      const ListEquality().hash([e?.date, e?.userId, e?.market, e?.status]);
+  int hash(MeetingRecord? e) => const ListEquality().hash(
+      [e?.date, e?.userId, e?.market, e?.status, e?.gouvernerat, e?.visitFile]);
 
   @override
   bool isValidKey(Object? o) => o is MeetingRecord;

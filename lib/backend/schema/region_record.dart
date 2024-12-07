@@ -20,14 +20,14 @@ class RegionRecord extends FirestoreRecord {
   String get name => _name ?? '';
   bool hasName() => _name != null;
 
-  // "location" field.
-  LatLng? _location;
-  LatLng? get location => _location;
-  bool hasLocation() => _location != null;
+  // "gouvernerat" field.
+  List<DocumentReference>? _gouvernerat;
+  List<DocumentReference> get gouvernerat => _gouvernerat ?? const [];
+  bool hasGouvernerat() => _gouvernerat != null;
 
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
-    _location = snapshotData['location'] as LatLng?;
+    _gouvernerat = getDataList(snapshotData['gouvernerat']);
   }
 
   static CollectionReference get collection =>
@@ -65,12 +65,10 @@ class RegionRecord extends FirestoreRecord {
 
 Map<String, dynamic> createRegionRecordData({
   String? name,
-  LatLng? location,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'name': name,
-      'location': location,
     }.withoutNulls,
   );
 
@@ -82,12 +80,14 @@ class RegionRecordDocumentEquality implements Equality<RegionRecord> {
 
   @override
   bool equals(RegionRecord? e1, RegionRecord? e2) {
-    return e1?.name == e2?.name && e1?.location == e2?.location;
+    const listEquality = ListEquality();
+    return e1?.name == e2?.name &&
+        listEquality.equals(e1?.gouvernerat, e2?.gouvernerat);
   }
 
   @override
   int hash(RegionRecord? e) =>
-      const ListEquality().hash([e?.name, e?.location]);
+      const ListEquality().hash([e?.name, e?.gouvernerat]);
 
   @override
   bool isValidKey(Object? o) => o is RegionRecord;

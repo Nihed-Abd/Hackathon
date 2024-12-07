@@ -9,9 +9,11 @@ import 'schema/users_record.dart';
 import 'schema/region_record.dart';
 import 'schema/product_record.dart';
 import 'schema/market_record.dart';
-import 'schema/adversaire_record.dart';
 import 'schema/meeting_record.dart';
 import 'schema/visit_file_record.dart';
+import 'schema/gouvernerat_record.dart';
+import 'schema/enemies_record.dart';
+import 'schema/rendu_visite_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -24,9 +26,11 @@ export 'schema/users_record.dart';
 export 'schema/region_record.dart';
 export 'schema/product_record.dart';
 export 'schema/market_record.dart';
-export 'schema/adversaire_record.dart';
 export 'schema/meeting_record.dart';
 export 'schema/visit_file_record.dart';
+export 'schema/gouvernerat_record.dart';
+export 'schema/enemies_record.dart';
+export 'schema/rendu_visite_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -176,43 +180,6 @@ Future<List<MarketRecord>> queryMarketRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query AdversaireRecords (as a Stream and as a Future).
-Future<int> queryAdversaireRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      AdversaireRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<AdversaireRecord>> queryAdversaireRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      AdversaireRecord.collection,
-      AdversaireRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<AdversaireRecord>> queryAdversaireRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      AdversaireRecord.collection,
-      AdversaireRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query MeetingRecords (as a Stream and as a Future).
 Future<int> queryMeetingRecordCount({
   Query Function(Query)? queryBuilder,
@@ -285,6 +252,117 @@ Future<List<VisitFileRecord>> queryVisitFileRecordOnce({
     queryCollectionOnce(
       VisitFileRecord.collection(parent),
       VisitFileRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query GouverneratRecords (as a Stream and as a Future).
+Future<int> queryGouverneratRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      GouverneratRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<GouverneratRecord>> queryGouverneratRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      GouverneratRecord.collection,
+      GouverneratRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<GouverneratRecord>> queryGouverneratRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      GouverneratRecord.collection,
+      GouverneratRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query EnemiesRecords (as a Stream and as a Future).
+Future<int> queryEnemiesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      EnemiesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<EnemiesRecord>> queryEnemiesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      EnemiesRecord.collection,
+      EnemiesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<EnemiesRecord>> queryEnemiesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      EnemiesRecord.collection,
+      EnemiesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query RenduVisiteRecords (as a Stream and as a Future).
+Future<int> queryRenduVisiteRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      RenduVisiteRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<RenduVisiteRecord>> queryRenduVisiteRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      RenduVisiteRecord.collection,
+      RenduVisiteRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<RenduVisiteRecord>> queryRenduVisiteRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      RenduVisiteRecord.collection,
+      RenduVisiteRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
