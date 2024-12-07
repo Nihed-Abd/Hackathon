@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -31,22 +30,22 @@ class ProductRecord extends FirestoreRecord {
   double get priceUsine => _priceUsine ?? 0.0;
   bool hasPriceUsine() => _priceUsine != null;
 
-  // "pictures" field.
-  List<String>? _pictures;
-  List<String> get pictures => _pictures ?? const [];
-  bool hasPictures() => _pictures != null;
-
   // "IsAvailable" field.
   bool? _isAvailable;
   bool get isAvailable => _isAvailable ?? false;
   bool hasIsAvailable() => _isAvailable != null;
 
+  // "picture" field.
+  String? _picture;
+  String get picture => _picture ?? '';
+  bool hasPicture() => _picture != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
     _priceUsine = castToType<double>(snapshotData['priceUsine']);
-    _pictures = getDataList(snapshotData['pictures']);
     _isAvailable = snapshotData['IsAvailable'] as bool?;
+    _picture = snapshotData['picture'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -88,6 +87,7 @@ Map<String, dynamic> createProductRecordData({
   String? description,
   double? priceUsine,
   bool? isAvailable,
+  String? picture,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +95,7 @@ Map<String, dynamic> createProductRecordData({
       'description': description,
       'priceUsine': priceUsine,
       'IsAvailable': isAvailable,
+      'picture': picture,
     }.withoutNulls,
   );
 
@@ -106,17 +107,16 @@ class ProductRecordDocumentEquality implements Equality<ProductRecord> {
 
   @override
   bool equals(ProductRecord? e1, ProductRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.name == e2?.name &&
         e1?.description == e2?.description &&
         e1?.priceUsine == e2?.priceUsine &&
-        listEquality.equals(e1?.pictures, e2?.pictures) &&
-        e1?.isAvailable == e2?.isAvailable;
+        e1?.isAvailable == e2?.isAvailable &&
+        e1?.picture == e2?.picture;
   }
 
   @override
   int hash(ProductRecord? e) => const ListEquality().hash(
-      [e?.name, e?.description, e?.priceUsine, e?.pictures, e?.isAvailable]);
+      [e?.name, e?.description, e?.priceUsine, e?.isAvailable, e?.picture]);
 
   @override
   bool isValidKey(Object? o) => o is ProductRecord;

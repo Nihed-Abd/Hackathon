@@ -92,8 +92,8 @@ class _LogInWidgetState extends State<LogInWidget>
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: Image.network(
-                              'https://img.pikbest.com/wp/202345/cartoon-forest-scene-beautiful-animated-wallpaper-hd_9582714.jpg!sw800',
+                            image: Image.asset(
+                              'assets/images/465580941_964470112252770_856753936027762412_n.png',
                             ).image,
                           ),
                         ),
@@ -121,10 +121,10 @@ class _LogInWidgetState extends State<LogInWidget>
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 50.0, 0.0, 0.0),
                                             child: Image.asset(
-                                              'assets/images/logo_0.png',
+                                              'assets/images/Molins_Endorsada_CMYK_SotacibKairouan.jpg',
                                               width: 276.0,
                                               height: 248.0,
-                                              fit: BoxFit.fitWidth,
+                                              fit: BoxFit.fitHeight,
                                             ),
                                           ),
                                         ),
@@ -186,20 +186,12 @@ class _LogInWidgetState extends State<LogInWidget>
                                                               context)
                                                           .primary,
                                                   indicatorWeight: 2.0,
-                                                  tabs: [
+                                                  tabs: const [
                                                     Tab(
-                                                      text: FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'ap3uwpii' /* Sign In */,
-                                                      ),
+                                                      text: 'Sign In',
                                                     ),
                                                     Tab(
-                                                      text: FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        '7uyjqbry' /* Sign Up */,
-                                                      ),
+                                                      text: 'Sign Up',
                                                     ),
                                                   ],
                                                   controller:
@@ -241,11 +233,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                               decoration:
                                                                   InputDecoration(
                                                                 labelText:
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                  '76uqwi48' /* Email Address */,
-                                                                ),
+                                                                    'Email Address',
                                                                 labelStyle:
                                                                     FlutterFlowTheme.of(
                                                                             context)
@@ -259,11 +247,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                               0.0,
                                                                         ),
                                                                 hintText:
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                  'lf5ed2ku' /* Enter your email... */,
-                                                                ),
+                                                                    'Enter your email...',
                                                                 hintStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
@@ -379,11 +363,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                               decoration:
                                                                   InputDecoration(
                                                                 labelText:
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                  'urbrroq3' /* Password */,
-                                                                ),
+                                                                    'Password',
                                                                 labelStyle:
                                                                     FlutterFlowTheme.of(
                                                                             context)
@@ -397,11 +377,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                               0.0,
                                                                         ),
                                                                 hintText:
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                  'skrres6s' /* Enter your password... */,
-                                                                ),
+                                                                    'Enter your password...',
                                                                 hintStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
@@ -581,11 +557,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         safeSetState(
                                                                             () {}));
                                                                   },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'bnw9bmdh' /* Forgot Password ? */,
-                                                                  ),
+                                                                  text:
+                                                                      'Forgot Password ?',
                                                                   options:
                                                                       FFButtonOptions(
                                                                     width:
@@ -658,44 +631,72 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                       return;
                                                                     }
 
-                                                                    await showModalBottomSheet(
-                                                                      isScrollControlled:
-                                                                          true,
-                                                                      backgroundColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      enableDrag:
-                                                                          false,
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return GestureDetector(
-                                                                          onTap: () =>
-                                                                              FocusScope.of(context).unfocus(),
-                                                                          child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                MediaQuery.viewInsetsOf(context),
-                                                                            child:
-                                                                                const LoginSucessWidget(),
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    ).then((value) =>
-                                                                        safeSetState(
-                                                                            () {}));
+                                                                    if (valueOrDefault(
+                                                                            currentUserDocument
+                                                                                ?.role,
+                                                                            '') ==
+                                                                        'Admin') {
+                                                                      context.pushNamedAuth(
+                                                                          'AdminHome',
+                                                                          context
+                                                                              .mounted);
 
-                                                                    context.goNamedAuth(
-                                                                        'HomePage',
-                                                                        context
-                                                                            .mounted);
+                                                                      await showModalBottomSheet(
+                                                                        isScrollControlled:
+                                                                            true,
+                                                                        backgroundColor:
+                                                                            Colors.transparent,
+                                                                        enableDrag:
+                                                                            false,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return GestureDetector(
+                                                                            onTap: () =>
+                                                                                FocusScope.of(context).unfocus(),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: MediaQuery.viewInsetsOf(context),
+                                                                              child: const LoginSucessWidget(),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          safeSetState(
+                                                                              () {}));
+                                                                    } else if (valueOrDefault(
+                                                                            currentUserDocument?.role,
+                                                                            '') ==
+                                                                        'Commertial') {
+                                                                      context.pushNamedAuth(
+                                                                          'HomePageCommercial',
+                                                                          context
+                                                                              .mounted);
+                                                                    } else {
+                                                                      await showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (alertDialogContext) {
+                                                                          return AlertDialog(
+                                                                            title:
+                                                                                const Text('Sorry , You are unauthorised'),
+                                                                            content:
+                                                                                const Text('Admin will check your status and approuve you soon'),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                child: const Text('Ok'),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        },
+                                                                      );
+                                                                    }
                                                                   },
-                                                                  text: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'bqwvw2nd' /* Sign In */,
-                                                                  ),
+                                                                  text:
+                                                                      'Sign In',
                                                                   options:
                                                                       FFButtonOptions(
                                                                     width:
@@ -778,11 +779,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     false,
                                                                 decoration:
                                                                     InputDecoration(
-                                                                  labelText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'sxa1tfz6' /* Your Name */,
-                                                                  ),
+                                                                  labelText:
+                                                                      'Your Name',
                                                                   labelStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -792,11 +790,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'd46wcmft' /* Enter your Name ... */,
-                                                                  ),
+                                                                  hintText:
+                                                                      'Enter your Name ...',
                                                                   hintStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -907,11 +902,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     false,
                                                                 decoration:
                                                                     InputDecoration(
-                                                                  labelText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'hn35t7xx' /* Email Address */,
-                                                                  ),
+                                                                  labelText:
+                                                                      'Email Address',
                                                                   labelStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -921,11 +913,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'u1r2ynpt' /* Enter your email... */,
-                                                                  ),
+                                                                  hintText:
+                                                                      'Enter your email...',
                                                                   hintStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1033,11 +1022,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     false,
                                                                 decoration:
                                                                     InputDecoration(
-                                                                  labelText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'luh38l5x' /* Phone Number */,
-                                                                  ),
+                                                                  labelText:
+                                                                      'Phone Number',
                                                                   labelStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1047,11 +1033,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'fe4z4crh' /* Enter your Phone Number ... */,
-                                                                  ),
+                                                                  hintText:
+                                                                      'Enter your Phone Number ...',
                                                                   hintStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1166,11 +1149,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     .passwordCreateVisibility,
                                                                 decoration:
                                                                     InputDecoration(
-                                                                  labelText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'bjezncsj' /* Password */,
-                                                                  ),
+                                                                  labelText:
+                                                                      'Password',
                                                                   labelStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1180,11 +1160,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '769tpfpw' /* Enter your password... */,
-                                                                  ),
+                                                                  hintText:
+                                                                      'Enter your password...',
                                                                   hintStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1317,11 +1294,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     .passwordConfirmVisibility,
                                                                 decoration:
                                                                     InputDecoration(
-                                                                  labelText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '5jjddv5j' /* Confirm Password */,
-                                                                  ),
+                                                                  labelText:
+                                                                      'Confirm Password',
                                                                   labelStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1331,11 +1305,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
-                                                                  hintText: FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'qq14ig8m' /* Confirm your password... */,
-                                                                  ),
+                                                                  hintText:
+                                                                      'Confirm your password...',
                                                                   hintStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -1553,11 +1524,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                       safeSetState(
                                                                           () {}));
                                                                 },
-                                                                text: FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '78pm0nzv' /* Create Account */,
-                                                                ),
+                                                                text:
+                                                                    'Create Account',
                                                                 options:
                                                                     FFButtonOptions(
                                                                   width: 190.0,

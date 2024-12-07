@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -51,15 +50,25 @@ class UsersRecord extends FirestoreRecord {
   String get codePin => _codePin ?? '';
   bool hasCodePin() => _codePin != null;
 
-  // "regions" field.
-  List<DocumentReference>? _regions;
-  List<DocumentReference> get regions => _regions ?? const [];
-  bool hasRegions() => _regions != null;
-
   // "role" field.
   String? _role;
   String get role => _role ?? '';
   bool hasRole() => _role != null;
+
+  // "gouvernerats" field.
+  List<DocumentReference>? _gouvernerats;
+  List<DocumentReference> get gouvernerats => _gouvernerats ?? const [];
+  bool hasGouvernerats() => _gouvernerats != null;
+
+  // "score" field.
+  int? _score;
+  int get score => _score ?? 0;
+  bool hasScore() => _score != null;
+
+  // "isBlocked" field.
+  bool? _isBlocked;
+  bool get isBlocked => _isBlocked ?? false;
+  bool hasIsBlocked() => _isBlocked != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -69,8 +78,10 @@ class UsersRecord extends FirestoreRecord {
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _codePin = snapshotData['CodePin'] as String?;
-    _regions = getDataList(snapshotData['regions']);
     _role = snapshotData['role'] as String?;
+    _gouvernerats = getDataList(snapshotData['gouvernerats']);
+    _score = castToType<int>(snapshotData['score']);
+    _isBlocked = snapshotData['isBlocked'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -115,6 +126,8 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? codePin,
   String? role,
+  int? score,
+  bool? isBlocked,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -126,6 +139,8 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'CodePin': codePin,
       'role': role,
+      'score': score,
+      'isBlocked': isBlocked,
     }.withoutNulls,
   );
 
@@ -145,8 +160,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.codePin == e2?.codePin &&
-        listEquality.equals(e1?.regions, e2?.regions) &&
-        e1?.role == e2?.role;
+        e1?.role == e2?.role &&
+        listEquality.equals(e1?.gouvernerats, e2?.gouvernerats) &&
+        e1?.score == e2?.score &&
+        e1?.isBlocked == e2?.isBlocked;
   }
 
   @override
@@ -158,8 +175,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.createdTime,
         e?.phoneNumber,
         e?.codePin,
-        e?.regions,
-        e?.role
+        e?.role,
+        e?.gouvernerats,
+        e?.score,
+        e?.isBlocked
       ]);
 
   @override

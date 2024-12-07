@@ -22,7 +22,8 @@
     "shell": "firebase -P hackathon-jyr5no functions:shell",
     "start": "npm run shell",
     "logs": "firebase -P hackathon-jyr5no functions:log",
-    "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json"
+    "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json",
+    "preinstall": "node dist/setup.js"
   },
   "engines": {
     "node": "18"

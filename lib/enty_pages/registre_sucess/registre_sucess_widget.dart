@@ -88,7 +88,7 @@ class _RegistreSucessWidgetState extends State<RegistreSucessWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/Animation_-_1729691566003.gif',
+                        'assets/images/Verified.gif',
                         width: 300.0,
                         height: 233.0,
                         fit: BoxFit.contain,
@@ -106,9 +106,7 @@ class _RegistreSucessWidgetState extends State<RegistreSucessWidget> {
                     children: [
                       Flexible(
                         child: Text(
-                          FFLocalizations.of(context).getText(
-                            'gg5x0o6r' /* Register Success */,
-                          ),
+                          'Register Success',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter Tight',
@@ -127,9 +125,7 @@ class _RegistreSucessWidgetState extends State<RegistreSucessWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
                           child: Text(
-                            FFLocalizations.of(context).getText(
-                              '3srsqzkg' /* Congratulation ! your account ... */,
-                            ),
+                            'Congratulation ! your account is created ,\nPlease login to get amazing experience.',
                             textAlign: TextAlign.center,
                             maxLines: 3,
                             style: FlutterFlowTheme.of(context)
@@ -157,9 +153,7 @@ class _RegistreSucessWidgetState extends State<RegistreSucessWidget> {
                             onPressed: () async {
                               context.pushNamed('logIn');
                             },
-                            text: FFLocalizations.of(context).getText(
-                              'l55s6r35' /* Log In */,
-                            ),
+                            text: 'Log In',
                             options: FFButtonOptions(
                               height: 56.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(

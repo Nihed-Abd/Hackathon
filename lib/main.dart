@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,9 +20,13 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
-  await FFLocalizations.initialize();
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
 
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -36,7 +41,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale = FFLocalizations.getStoredLocale();
+  Locale? _locale;
 
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
@@ -73,7 +78,6 @@ class _MyAppState extends State<MyApp> {
 
   void setLocale(String language) {
     safeSetState(() => _locale = createLocale(language));
-    FFLocalizations.storeLocale(language);
   }
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
@@ -96,8 +100,6 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       supportedLocales: const [
         Locale('en'),
-        Locale('fr'),
-        Locale('ar'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -26,11 +25,6 @@ class MarketRecord extends FirestoreRecord {
   String get adresse => _adresse ?? '';
   bool hasAdresse() => _adresse != null;
 
-  // "region" field.
-  DocumentReference? _region;
-  DocumentReference? get region => _region;
-  bool hasRegion() => _region != null;
-
   // "location" field.
   LatLng? _location;
   LatLng? get location => _location;
@@ -41,12 +35,29 @@ class MarketRecord extends FirestoreRecord {
   List<DocumentReference> get products => _products ?? const [];
   bool hasProducts() => _products != null;
 
+  // "gouvernerat" field.
+  DocumentReference? _gouvernerat;
+  DocumentReference? get gouvernerat => _gouvernerat;
+  bool hasGouvernerat() => _gouvernerat != null;
+
+  // "Type" field.
+  String? _type;
+  String get type => _type ?? '';
+  bool hasType() => _type != null;
+
+  // "relation" field.
+  String? _relation;
+  String get relation => _relation ?? '';
+  bool hasRelation() => _relation != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
     _adresse = snapshotData['adresse'] as String?;
-    _region = snapshotData['region'] as DocumentReference?;
     _location = snapshotData['location'] as LatLng?;
     _products = getDataList(snapshotData['products']);
+    _gouvernerat = snapshotData['gouvernerat'] as DocumentReference?;
+    _type = snapshotData['Type'] as String?;
+    _relation = snapshotData['relation'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -85,15 +96,19 @@ class MarketRecord extends FirestoreRecord {
 Map<String, dynamic> createMarketRecordData({
   String? name,
   String? adresse,
-  DocumentReference? region,
   LatLng? location,
+  DocumentReference? gouvernerat,
+  String? type,
+  String? relation,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'Name': name,
       'adresse': adresse,
-      'region': region,
       'location': location,
+      'gouvernerat': gouvernerat,
+      'Type': type,
+      'relation': relation,
     }.withoutNulls,
   );
 
@@ -108,14 +123,23 @@ class MarketRecordDocumentEquality implements Equality<MarketRecord> {
     const listEquality = ListEquality();
     return e1?.name == e2?.name &&
         e1?.adresse == e2?.adresse &&
-        e1?.region == e2?.region &&
         e1?.location == e2?.location &&
-        listEquality.equals(e1?.products, e2?.products);
+        listEquality.equals(e1?.products, e2?.products) &&
+        e1?.gouvernerat == e2?.gouvernerat &&
+        e1?.type == e2?.type &&
+        e1?.relation == e2?.relation;
   }
 
   @override
-  int hash(MarketRecord? e) => const ListEquality()
-      .hash([e?.name, e?.adresse, e?.region, e?.location, e?.products]);
+  int hash(MarketRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.adresse,
+        e?.location,
+        e?.products,
+        e?.gouvernerat,
+        e?.type,
+        e?.relation
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is MarketRecord;
