@@ -20,10 +20,9 @@
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
     "serve": "firebase -P hackathon-jyr5no emulators:start --only functions",
     "shell": "firebase -P hackathon-jyr5no functions:shell",
-    "start": "npm run shell",
+    "start": "node init && npm run shell",
     "logs": "firebase -P hackathon-jyr5no functions:log",
-    "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json",
-    "preinstall": "node dist/setup.js"
+    "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json"
   },
   "engines": {
     "node": "18"
